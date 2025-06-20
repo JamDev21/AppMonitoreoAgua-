@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TankCard } from "@/components/tank-card"
 import { DeviceStatus } from "@/components/device-status"
-import { timeStamp } from "console"
+// import { timeStamp } from "console"
+
 
 // Tipo para los datos del sistema
 interface SystemData {
@@ -45,7 +46,7 @@ export default function Dashboard() {
     try {
       // En un entorno de desarrollo o cuando la API no está disponible,
       // usamos datos simulados en lugar de intentar hacer fetch
-      const isDemoMode = false // Cambiar a false cuando la API esté disponible
+      const isDemoMode = true // Cambiar a false cuando la API esté disponible
 
       if (isDemoMode) {
         // Simulamos una pequeña demora para imitar una solicitud de red
@@ -69,7 +70,6 @@ export default function Dashboard() {
         setError("Ejecutando en modo demostración con datos simulados")
       } else {
         // Código original para conectar con la API real
-        // Reemplazar con la URL real de tu API ESP32
         // const response = await fetch("http://192.168.92.21/api/data")
         const response = await fetch("/api/proxy")
 
@@ -106,7 +106,7 @@ export default function Dashboard() {
     fetchData()
 
     // Configurar intervalo de actualización
-    const interval = setInterval(fetchData, 1000)
+    const interval = setInterval(fetchData, 2000)
 
     // Limpiar intervalo al desmontar
     return () => clearInterval(interval)
